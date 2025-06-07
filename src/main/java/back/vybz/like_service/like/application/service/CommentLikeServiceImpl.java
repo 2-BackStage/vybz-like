@@ -1,6 +1,8 @@
 package back.vybz.like_service.like.application.service;
 
 
+import back.vybz.like_service.kafka.event.CommentLikeCountEvent;
+import back.vybz.like_service.kafka.producer.CommentLikeCountKafkaProducer;
 import back.vybz.like_service.like.domain.mongodb.CommentLike;
 import back.vybz.like_service.like.dto.request.RequestCommentLikeDto;
 import back.vybz.like_service.like.dto.response.ResponseCommentLikeDto;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class CommentLikeServiceImpl implements CommentLikeService {
 
     private final CommentLikeRepository commentLikeRepository;
+    private final CommentLikeCountKafkaProducer commentLikeCountKafkaProducer;
 
     /*
         * 댓글 좋아요 토글
@@ -34,6 +37,15 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         if (existingLike.isPresent()) {
             commentLikeRepository.deleteById(existingLike.get().getId());
             liked = false;
+
+            commentLikeCountKafkaProducer.send(
+                    CommentLikeCountEvent.builder()
+                            .commentId(commentId)
+                            .delta(-1)
+                            .build()
+            );
+
+
         } else {
             CommentLike newLike = CommentLike.builder()
                     .commentId(commentId)
@@ -46,6 +58,13 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 
             commentLikeRepository.save(newLike);
             liked = true;
+
+            commentLikeCountKafkaProducer.send(
+                    CommentLikeCountEvent.builder()
+                            .commentId(commentId)
+                            .delta(1)
+                            .build()
+            );
         }
 
         return ResponseCommentLikeDto.builder()
