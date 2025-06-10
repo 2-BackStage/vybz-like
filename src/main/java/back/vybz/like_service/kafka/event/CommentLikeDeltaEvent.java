@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class CommentLikeCountEvent {
+public class CommentLikeDeltaEvent {
 
     private String commentId;
     private int delta;
 
     @Builder
-    public CommentLikeCountEvent(String commentId,
+    public CommentLikeDeltaEvent(String commentId,
                                  int delta) {
         this.commentId = commentId;
         this.delta = delta;
