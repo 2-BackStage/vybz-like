@@ -44,6 +44,7 @@ public enum BaseResponseStatus {
     NO_EXIST_NOTICE(HttpStatus.NOT_FOUND,false,404, "존재하지 않는 공지사항입니다."),
     NO_EXIST_COMMENT_OR_NO_AUTH(HttpStatus.NOT_FOUND, false,404,"댓글이 존재하지 않거나 권한이 없습니다."),
     COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, false, 405, "존재하지 않는 댓글입니다."),
+    DUPLICATE_LIVE_LIKE(HttpStatus.BAD_REQUEST, false, 406, "이미 좋아요를 누른 라이브입니다."),
 
 
     /**
