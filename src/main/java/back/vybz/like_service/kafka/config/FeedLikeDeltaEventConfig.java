@@ -16,7 +16,7 @@ public class FeedLikeDeltaEventConfig {
 
     @Bean
     public ProducerFactory<String, FeedLikeDeltaEvent> feedLikeDeltaEventProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(commonKafkaProducerConfig.producerConfigs());
+        return new DefaultKafkaProducerFactory<>(commonKafkaProducerConfig.commonProducerConfigs());
     }
 
     @Bean
