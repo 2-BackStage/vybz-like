@@ -28,7 +28,7 @@ jobs:
           mkdir -p src/main/resources 
           
           # GitHub Secrets에 등록한 application.yml 내용을 복사
-            echo "${{ secrets.LIKE_APPLICATION_YML }}" | base64 -d > src/main/resources/application.yml
+          echo "${{ secrets.LIKE_APPLICATION_YML }}" | base64 -d > src/main/resources/application.yml
           
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/like-service:${{ github.sha }} .
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/like-service:${{ github.sha }}
