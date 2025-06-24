@@ -2,7 +2,6 @@ package back.vybz.like_service.like.application.service;
 
 import back.vybz.like_service.common.exception.BaseException;
 import back.vybz.like_service.common.exception.BaseResponseStatus;
-import back.vybz.like_service.common.util.LiveLikeRedisService;
 import back.vybz.like_service.kafka.event.LiveLikeDeltaEvent;
 import back.vybz.like_service.kafka.producer.LiveLikeDeltaEventProducer;
 import back.vybz.like_service.like.domain.mongodb.LiveLike;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class LiveLikeServiceImpl implements LiveLikeService {
 
     private final LiveLikeRepository liveLikeRepository;
-    private final LiveLikeRedisService liveLikeRedisService;
     private final LiveLikeDeltaEventProducer liveLikeDeltaEventProducer;
 
     @Override
@@ -38,8 +36,6 @@ public class LiveLikeServiceImpl implements LiveLikeService {
                 .streamKey(requestLiveLikeDto.getStreamKey())
                 .build();
         liveLikeRepository.save(liveLike);
-
-        liveLikeRedisService.increment(requestLiveLikeDto.getStreamKey());
 
         liveLikeDeltaEventProducer.send(
                 LiveLikeDeltaEvent.builder()
