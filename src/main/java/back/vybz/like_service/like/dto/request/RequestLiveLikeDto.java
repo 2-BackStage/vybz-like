@@ -11,19 +11,15 @@ import java.time.Instant;
 @NoArgsConstructor
 public class RequestLiveLikeDto {
 
-    private String likerUuid;
     private String streamKey;
 
     @Builder
-    public RequestLiveLikeDto(String likerUuid,
-                              String streamKey) {
-        this.likerUuid = likerUuid;
+    public RequestLiveLikeDto(String streamKey) {
         this.streamKey = streamKey;
     }
 
-    public static RequestLiveLikeDto from(RequestLiveLikeVo requestLiveLikeVo, String likerUuid) {
+    public static RequestLiveLikeDto from(RequestLiveLikeVo requestLiveLikeVo) {
         return RequestLiveLikeDto.builder()
-                .likerUuid(likerUuid)
                 .streamKey(requestLiveLikeVo.getStreamKey())
                 .build();
     }

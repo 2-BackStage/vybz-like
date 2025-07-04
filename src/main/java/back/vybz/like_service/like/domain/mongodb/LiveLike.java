@@ -19,17 +19,13 @@ public class LiveLike {
     @Id
     private String id;
 
-    private String likerUuid;
-
     private String streamKey;
 
     @CreatedDate
     private Instant createdAt;
 
     @Builder
-    public LiveLike(String likerUuid,
-                    String streamKey) {
-        this.likerUuid = likerUuid;
+    public LiveLike(String streamKey) {
         this.streamKey = streamKey;
     }
 }

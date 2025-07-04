@@ -23,8 +23,7 @@ public class LiveLikeServiceImpl implements LiveLikeService {
     @Transactional
     public void likeLiveStream(RequestLiveLikeDto requestLiveLikeDto) {
 
-        boolean isLiked = liveLikeRepository.existsByLikerUuidAndStreamKey(
-                requestLiveLikeDto.getLikerUuid(),
+        boolean isLiked = liveLikeRepository.existsByStreamKey(
                 requestLiveLikeDto.getStreamKey()
         );
         if (isLiked) {
@@ -32,7 +31,6 @@ public class LiveLikeServiceImpl implements LiveLikeService {
         }
 
         LiveLike liveLike = LiveLike.builder()
-                .likerUuid(requestLiveLikeDto.getLikerUuid())
                 .streamKey(requestLiveLikeDto.getStreamKey())
                 .build();
         liveLikeRepository.save(liveLike);

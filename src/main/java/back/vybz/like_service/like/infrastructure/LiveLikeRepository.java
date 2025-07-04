@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface LiveLikeRepository extends MongoRepository<LiveLike,String> {
 
-    boolean existsByLikerUuidAndStreamKey(String likerUuid, String streamKey);
+    boolean existsByStreamKey(String streamKey);
 }

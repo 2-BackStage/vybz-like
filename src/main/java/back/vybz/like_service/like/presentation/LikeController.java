@@ -58,11 +58,8 @@ public class LikeController {
             tags = {"LIKE-SERVICE"}
     )
     @PostMapping("/live")
-    public BaseResponseEntity<Void> likeLiveStream(//HttpServletRequest httpServletRequest,
-                                                   @RequestBody RequestLiveLikeVo requestLiveLikeVo) {
-        //String writerUuid = httpServletRequest.getHeader("X-USER-Id");
-        String likerUuid = "test-liker-uuid";
-        RequestLiveLikeDto requestLiveLikeDto = RequestLiveLikeDto.from(requestLiveLikeVo, likerUuid);
+    public BaseResponseEntity<Void> likeLiveStream(@RequestBody RequestLiveLikeVo requestLiveLikeVo) {
+        RequestLiveLikeDto requestLiveLikeDto = RequestLiveLikeDto.from(requestLiveLikeVo);
         liveLikeService.likeLiveStream(requestLiveLikeDto);
         return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
     }
