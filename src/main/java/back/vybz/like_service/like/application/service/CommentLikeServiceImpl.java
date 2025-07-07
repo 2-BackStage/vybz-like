@@ -55,10 +55,13 @@ public class CommentLikeServiceImpl implements CommentLikeService {
                     .writerType(requestCommentLikeDto.getWriterType())
                     .parentCommentId(requestCommentLikeDto.getParentCommentId())
                     .build();
-
-            commentLikeRepository.save(newLike);
-            liked = true;
-
+            try {
+                commentLikeRepository.save(newLike);
+                liked = true;
+            } catch (org.springframework.dao.DuplicateKeyException e) {
+                // 중복이면 이미 누군가 저장한 것, 다시 조회해서 liked=true로 처리
+                liked = true;
+            }
             commentLikeDeltaEventKafkaProducer.send(
                     CommentLikeDeltaEvent.builder()
                             .commentId(commentId)

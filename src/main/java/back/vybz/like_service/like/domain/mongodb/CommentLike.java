@@ -7,13 +7,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 
 import java.time.Instant;
 
 @Getter
 @NoArgsConstructor
 @Document(collection = "comment_likes")
+@CompoundIndex(name = "unique_comment_like", def = "{'commentId': 1, 'likerUuid': 1}", unique = true)
 public class CommentLike {
 
     @Id

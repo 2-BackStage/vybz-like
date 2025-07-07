@@ -8,12 +8,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 
 import java.time.Instant;
 
 @Getter
 @NoArgsConstructor
 @Document("feed_like")
+@CompoundIndex(name = "unique_feed_like", def = "{'feedId': 1, 'likerUuid': 1}", unique = true)
 public class FeedLike {
 
     @Id

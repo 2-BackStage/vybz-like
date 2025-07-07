@@ -51,8 +51,13 @@ public class FeedLikeServiceImpl implements FeedLikeService {
                     .feedType(requestFeedLikeDto.getFeedType())
                     .likerUuid(likerUuid)
                     .build();
-            feedLikeRepository.save(newLike);
-            liked = true;
+            try {
+                feedLikeRepository.save(newLike);
+                liked = true;
+            } catch (org.springframework.dao.DuplicateKeyException e) {
+                // 중복이면 이미 누군가 저장한 것, 다시 조회해서 liked=true로 처리
+                liked = true;
+            }
             feedLikeDeltaEventProducer.send(
                     FeedLikeDeltaEvent.builder()
                             .feedId(feedId)
