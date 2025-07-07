@@ -64,5 +64,4 @@ public class LikeController {
         return new BaseResponseEntity<>(BaseResponseStatus.SUCCESS);
     }
 
-
 }
