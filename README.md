@@ -33,7 +33,6 @@ VYBZ Like Service는 다음과 같은 기능을 제공합니다:
 ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 ![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)
@@ -498,16 +497,6 @@ kafka-topics.sh --bootstrap-server <탄력적 IP>:10000 --list
 
 # 토픽 상세 정보 확인
 kafka-topics.sh --bootstrap-server <탄력적 IP>:10000 --describe --topic feed-delta-count
-```
-
-#### Redis 연결 실패
-
-```bash
-# Redis 연결 확인
-redis-cli -h <탄력적 IP>  -p 63379 -a <비밀번호>
-
-# Redis 상태 확인
-redis-cli -h <탄력적 IP>  -p 63379 -a <비밀번호> ping
 ```
 
 #### Eureka 연결 실패
